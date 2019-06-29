@@ -39,6 +39,20 @@ class QuoteMachina extends Component {
             }
         })
     }
+
+    renderQuote = () => {
+        const { title, content, link } = this.state.quote;
+        function createMarkup(){
+            return {__html: content}
+        }
+        return (
+            <a href={link}>
+            <h1>{title}</h1>
+            <h2 dangerouslySetInnerHTML={createMarkup()}></h2>
+            </a>
+        )
+    }
+
   render() {
       console.log(this.state);
       const {hasQuote, quote} = this.state;
@@ -47,7 +61,7 @@ class QuoteMachina extends Component {
         <h1>QuoteMachina 2</h1>
         <button onClick={this.getQuote}>Get Quote</button>
         <br/><br/>
-        {hasQuote === true ? JSON.stringify(quote) : "no quote yet"}
+        {hasQuote === true ? this.renderQuote() : "no quote yet"}
       </div>
     )
   }
